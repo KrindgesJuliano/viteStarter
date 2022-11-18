@@ -1,15 +1,21 @@
 import { FC, useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Home from './modules/Home';
 
 const App: FC = () => {
   const [count, setCount] = useState(0);
   return (
-    <div>
-      <h1>Hello From Vite Starter</h1>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount((prevState) => prevState + 1)} type="button">
-        +
-      </button>
-    </div>
+    <main className='container mx-auto mt-4'>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="/:id">
+          <Route index element={<h1>Show!</h1>} />
+          <Route path='edit' element={<h1>Edit!</h1>} />
+        </Route>
+        <Route path="*" element={<Navigate to='/' />} />
+      </Routes>
+    </main>
   );
 };
 
